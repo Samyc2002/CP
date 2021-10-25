@@ -1,0 +1,1 @@
+flipsb = a.size()-flipsb;

@@ -1,0 +1,224 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int r,c,flag=0;
+    cin>>r>>c;
+    if(r>1)
+    {
+        string s[r];
+        for(int i=0;i<r;i++)
+            cin>>s[i];
+        for(int i=0;i<r;i++)
+    {
+        for(int j=0;j<c;j++)
+        {
+            if(s[i][j]=='S')
+            {
+                if(i==0)
+                {
+                    if(j==0)
+                    {
+                        if(s[i+1][j]!='W'&&s[i][j+1]!='W')
+                        {
+                            if(s[i+1][j]=='.')s[i+1][j]='D';
+                            if(s[i][j+1]=='.')s[i][j+1]='D';
+                        }
+                        else
+                        {
+                            flag=1;
+                            break;
+                        }
+                    }
+                    else if(j==c-1)
+                    {
+                        if(s[i+1][j]!='W'&&s[i][j-1]!='W')
+                        {
+                            if(s[i+1][j]=='.')s[i+1][j]='D';
+                            if(s[i][j-1]=='.')s[i][j-1]='D';
+                        }
+                        else
+                        {
+                            flag=1;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if(s[i+1][j]!='W'&&s[i][j+1]!='W'&&s[i][j-1]!='W')
+                        {
+                            if(s[i+1][j]=='.')s[i+1][j]='D';
+                            if(s[i][j+1]=='.')s[i][j+1]='D';
+                            if(s[i][j-1]=='.')s[i][j-1]='D';
+                        }
+                        else
+                        {
+                            flag=1;
+                            break;
+                        }
+                    }
+                }
+                else if(i==r-1)
+                {
+                    if(j==0)
+                    {
+                        if(s[i-1][j]!='W'&&s[i][j+1]!='W')
+                        {
+                            if(s[i-1][j]=='.')s[i-1][j]='D';
+                            if(s[i][j+1]=='.')s[i][j+1]='D';
+                        }
+                        else
+                        {
+                            flag=1;
+                            break;
+                        }
+                    }
+                    else if(j==c-1)
+                    {
+                        if(s[i-1][j]!='W'&&s[i][j-1]!='W')
+                        {
+                            if(s[i-1][j]=='.')s[i-1][j]='D';
+                            if(s[i][j-1]=='.')s[i][j-1]='D';
+                        }
+                        else
+                        {
+                            flag=1;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if(s[i-1][j]!='W'&&s[i][j+1]!='W'&&s[i][j-1]!='W')
+                        {
+                            if(s[i-1][j]=='.')s[i-1][j]='D';
+                            if(s[i][j+1]=='.')s[i][j+1]='D';
+                            if(s[i][j-1]=='.')s[i][j-1]='D';
+                        }
+                        else
+                        {
+                            flag=1;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    if(j==0)
+                    {
+                        if(s[i+1][j]!='W'&&s[i][j+1]!='W'&&s[i-1][j]!='W')
+                        {
+                            if(s[i+1][j]=='.')s[i+1][j]='D';
+                            if(s[i][j+1]=='.')s[i][j+1]='D';
+                            if(s[i-1][j]=='.')s[i-1][j]='D';
+                        }
+                        else
+                        {
+                            flag=1;
+                            break;
+                        }
+                    }
+                    else if(j==c-1)
+                    {
+                        if(s[i+1][j]!='W'&&s[i][j-1]!='W'&&s[i-1][j]!='W')
+                        {
+                            if(s[i+1][j]=='.')s[i+1][j]='D';
+                            if(s[i][j-1]=='.')s[i][j-1]='D';
+                            if(s[i-1][j]=='.')s[i-1][j]='D';
+                        }
+                        else
+                        {
+                            flag=1;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if(s[i+1][j]!='W'&&s[i][j+1]!='W'&&s[i][j-1]!='W'&&s[i-1][j]!='W')
+                        {
+                            if(s[i+1][j]=='.')s[i+1][j]='D';
+                            if(s[i-1][j]=='.')s[i-1][j]='D';
+                            if(s[i][j+1]=='.')s[i][j+1]='D';
+                            if(s[i][j-1]=='.')s[i][j-1]='D';
+                        }
+                        else
+                        {
+                            flag=1;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if(flag==1)
+            break;
+    }
+    if(flag==1)
+        cout<<"NO";
+    else
+    {
+        cout<<"YES"<<endl;
+        for(int i=0;i<r;i++)
+            cout<<s[i]<<endl;
+    }
+    }
+    else
+    {
+        string s;
+        cin>>s;
+        for(int i=0;i<c;i++)
+        {
+            if(s[i]=='S')
+            {
+                if(i==0)
+                {
+                    if(s[i+1]!='W')
+                    {
+                        if(s[i+1]=='.')s[i+1]='D';
+                    }
+                    else
+                    {
+                        flag=1;
+                        break;
+                    }
+                }
+                else if(i==c-1)
+                {
+                    if(s[i-1]!='W')
+                    {
+                        if(s[i-1]=='.')s[i-1]='D';
+                    }
+                    else
+                    {
+                        flag=1;
+                        break;
+                    }
+                }
+                else
+                {
+                    if(s[i+1]!='W'&&s[i-1]!='W')
+                    {
+                        if(s[i+1]=='.')s[i+1]='D';
+                        if(s[i-1]=='.')s[i-1]='D';
+                    }
+                    else
+                    {
+                        flag=1;
+                        break;
+                    }
+                }
+            }
+        }
+        if(flag==1)
+        {
+            cout<<"NO";
+            return 0;
+        }
+        else
+        {
+            cout<<"YES"<<endl<<s;
+            return 0;
+        }
+    }
+}
