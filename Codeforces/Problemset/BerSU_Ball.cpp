@@ -135,29 +135,28 @@ void mergeSort(int arr[],int l,int r){          // to be used only for larger ar
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int n, m;
+    ll n, m;
     cin >> n;
-    vi boys(n);
+    vector<ll> boys(n);
     foi(i, n) {
         cin >> boys[i];
     }
     cin >> m;
-    vi girls(m);
+    vector<ll> girls(m);
     foi(i, m) {
         cin >> girls[i];
     }
-    sort(all(boys));
-    sort(all(girls));
-    int result = 0;
-    foi(i, n) {
-        foi(j, m) {
-            if (max(boys[i] - girls[j], girls[j] - boys[j]) <= 1) {
+    sort(all(boys)); sort(all(girls));
+    ll pairs=0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (abs(boys[i] - girls[j]) <= 1) {
                 girls[j] = 1000;
-                result++;
+                pairs++;
                 break;
             }
         }
     }
-    cout << result;
+    cout << pairs;
     return 0;
 }
