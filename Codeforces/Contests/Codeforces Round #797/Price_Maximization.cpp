@@ -133,29 +133,26 @@ void mergeSort(int arr[],int l,int r){          // to be used only for larger ar
 }
 
 void solve() {
-    int n, k;
+    ll n, k, ans=0;
     cin >> n >> k;
-    string strip;
-    cin >> strip;
-    vi blacks(n, 0);
+    vector<ll> a(n);
     foi(i, n) {
-        if(i==0) {
-            if(strip[i] == 'B') {
-                blacks[i] = 1;
-            }
-        }
-        if(strip[i] == 'B') {
-            blacks[i] = blacks[i - 1] + 1;
+        cin >> a[i];
+        ans += a[i] / k;
+        a[i] %= k;
+    }
+    sort(all(a));
+    ll front = 0, back = n - 1;
+    while(front<back) {
+        if(a[front]+a[back] >= k) {
+            ans++;
+            front++;
+            back--;
         } else {
-            blacks[i] = blacks[i - 1];
+            front++;
         }
     }
-    int change = k;
-    gfoi(i, k - 1, n, 1)
-    {
-        change = min(change, k - (blacks[i] - blacks[i - k]));
-    }
-    cout << change << endl;
+    cout << ans << endl;
 }
 
 int main() {
