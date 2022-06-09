@@ -133,13 +133,26 @@ void mergeSort(int arr[],int l,int r){          // to be used only for larger ar
 }
 
 void solve() {
-    int x;
-    cin >> x;
-    int y = x&(-x);
-    while(!(x&y) || !(x^y)) {
-        y++;
-    }
-    cout << y << endl;
+    int n;
+    cin >> n;
+    vs t(2*n);
+    foi(i, 2*n) cin >> t[i];
+    string s;
+    cin >> s;
+    // map<string, int> frequency;
+    // foi(i, 2*n) {
+    //     if(frequency.find(t[i]) == frequency.end()) {
+    //         frequency[t[i]] = 1;
+    //     } else {
+    //         frequency[t[i]]++;
+    //     }
+    // }
+    // for(map<string, int>::iterator itr = frequency.begin(); itr != frequency.end(); ++itr) {
+    //     if(itr->second%2) {
+    //         cout << itr->first << endl;
+    //     }
+    // }
+    cout << t[0] << endl;
 }
 
 int main() {
@@ -147,7 +160,7 @@ int main() {
     cin.tie(NULL);
     int t;
     cin >> t;
-    while (t--) {
+    while(t--) {
         solve();
     }
     return 0;
