@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
+
 using namespace std;
 
 #define gfoi(i, j, k, in) for (int i=j ; i<k ; i+=in)
