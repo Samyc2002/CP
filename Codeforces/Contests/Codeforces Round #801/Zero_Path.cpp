@@ -49,43 +49,13 @@ void swap (int* a, int* b) {
     *b = t;
 }
 
-bool backtrack(int sum, vii grid, int i, int j) {
-    bool result = (sum == 0);
-
-    if(j == grid[0].size()-1 && i == grid.size()-1) {
-        // return result;
-    }
-    else if (j == grid[0].size() - 1)
-    {
-        sum += grid[i + 1][j];
-        result = backtrack(sum, grid, i + 1, j);
-        sum -= grid[i + 1][j];
-    }
-    else if (i == grid.size() - 1)
-    {
-        sum += grid[i][j + 1];
-        result = backtrack(sum, grid, i, j + 1);
-        sum -= grid[i][j + 1];
-    }
-    else
-    {
-        sum += grid[i + 1][j];
-        bool result1 = backtrack(sum, grid, i + 1, j);
-        sum -= grid[i + 1][j];
-        sum += grid[i][j + 1];
-        bool result2 = backtrack(sum, grid, i, j + 1);
-        sum -= grid[i][j + 1];
-        result = (result1 || result2);
-    }
-
-    return result;
-}
-
 void solve() {
     int n, m;
     cin >> n >> m;
 
     vii grid(n, vi(m, 0));
+    vii mn(n, vi(m, 0));
+    vii mx(n, vi(m, 0));
 
     foi(i, n) {
         foi(j, m) {
@@ -93,13 +63,25 @@ void solve() {
         }
     }
 
-    int sum = grid[0][0];
+    mn[0][0] = mx[0][0] = grid[0][0];
 
-    if(backtrack(sum, grid, 0, 0)) {
-        cout << "YES" << endl;
-    } else {
-        cout << "NO" << endl;
+    gfoi(i, 1, n, 1)
+        mx[i][0] = mn[i][0] = mx[i - 1][0] + grid[i][0];
+
+    gfoi(j, 1, m, 1)
+        mx[0][j] = mn[0][j] = mx[0][j - 1] + grid[0][j];
+
+    gfoi(i, 1, n, 1) {
+        gfoi(j, 1, m, 1) {
+            mx[i][j] = max(mx[i - 1][j], mx[i][j - 1]) + grid[i][j];
+            mn[i][j] = min(mn[i - 1][j], mn[i][j - 1]) + grid[i][j];
+        }
     }
+
+    if(mx[n - 1][m - 1] % 2 || mn[n - 1][m - 1] > 0 || mx[n - 1][m - 1] < 0)
+        cout << "NO\n";
+    else
+        cout << "YES\n";
 }
 
 int main() {
