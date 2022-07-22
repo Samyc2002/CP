@@ -1,31 +1,31 @@
-#include <iostream>
-#include <string>
-#include <vector>
 #include <algorithm>
-#include <sstream>
-#include <queue>
-#include <deque>
-#include <bitset>
-#include <iterator>
-#include <list>
-#include <stack>
-#include <map>
-#include <set>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <limits>
-#include <time.h>
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include <assert.h>
+#include <bitset>
+#include <deque>
+#include <functional>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <list>
+#include <map>
+#include <math.h>
+#include <numeric>
+#include <queue>
+#include <set>
+#include <sstream>
+#include <stack>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <string>
+#include <time.h>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
-#define gfoi(i, j, k, in) for (int i=j ; i<k ; i+=in)
-#define gfod(i, j, k, in) for (int i=j ; i>=k ; i-=in)
+#define gfoi(i, j, k, in) for (int i = j; i < k; i += in)
+#define gfod(i, j, k, in) for (int i = j; i >= k; i -= in)
 #define foi(i, j) gfoi(i, 0, j, 1)
 #define fod(i, j) gfod(i, 0, j, 1)
 #define all(cont) cont.begin(), cont.end()
@@ -39,7 +39,7 @@ typedef vector<vi> vii;
 typedef long int l;
 typedef unsigned long int ul;
 typedef long long int ll;
-typedef unsigned long long int  ull;
+typedef unsigned long long int ull;
 typedef pair<int, int> pii;
 typedef map<int, int>::iterator mi;
 
@@ -53,21 +53,18 @@ int maxar(int ar[], int n) {
     return max;
 }
 
-void swap (int* a, int* b)
-{
+void swap(int *a, int *b) {
     int t = *a;
     *a = *b;
     *b = t;
 }
 
-int partition (int arr[], int low, int high)        // function to support quicksort
+int partition(int arr[], int low, int high) // function to support quicksort
 {
     int pivot = arr[high];
     int i = (low - 1);
-    for (int j = low; j <= high - 1; j++)
-    {
-        if (arr[j] < pivot)
-        {
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] < pivot) {
             i++;
             swap(&arr[i], &arr[j]);
         }
@@ -76,17 +73,17 @@ int partition (int arr[], int low, int high)        // function to support quick
     return (i + 1);
 }
 
-void quickSort(int arr[], int low, int high)        // to be used only for small arrays and datasets
+void quickSort(int arr[], int low,
+               int high) // to be used only for small arrays and datasets
 {
-    if (low < high)
-    {
+    if (low < high) {
         int pi = partition(arr, low, high);
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }
 }
 
-void merge(int arr[], int l, int m, int r)          // function to support merge sort
+void merge(int arr[], int l, int m, int r) // function to support merge sort
 {
     int n1 = m - l + 1;
     int n2 = r - m;
@@ -98,13 +95,12 @@ void merge(int arr[], int l, int m, int r)          // function to support merge
     int i = 0;
     int j = 0;
     int k = l;
- 
+
     while (i < n1 && j < n2) {
         if (L[i] <= R[j]) {
             arr[k] = L[i];
             i++;
-        }
-        else {
+        } else {
             arr[k] = R[j];
             j++;
         }
@@ -122,27 +118,23 @@ void merge(int arr[], int l, int m, int r)          // function to support merge
     }
 }
 
-void mergeSort(int arr[],int l,int r){          // to be used only for larger arrays or datasets
-    if(l>=r){
+void mergeSort(int arr[], int l,
+               int r) { // to be used only for larger arrays or datasets
+    if (l >= r) {
         return;
     }
-    int m =l+ (r-l)/2;
-    mergeSort(arr,l,m);
-    mergeSort(arr,m+1,r);
-    merge(arr,l,m,r);
+    int m = l + (r - l) / 2;
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + 1, r);
+    merge(arr, l, m, r);
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    long double n, m;
+    ll n, m;
     cin >> n >> m;
-    long double eff1 = n-m+1;
-    long double eff2 = n/m;
-    if((ull)eff2 == 1) {
-        cout << n-m << " " << max((ull)(eff1*(eff1-1)/2), 1ULL);
-    } else {
-        cout << max((ull)(m*(eff2*(eff2-1)/2)), 1ULL) << " " << max((ull)(eff1*(eff1-1)/2), 1ULL);
-    }
+    cout << (m * (n / m - 1) + (n % m) * 2) * (n / m) / 2 << " "
+         << ((n - m + 1) * (n - m) / 2);
     return 0;
 }
