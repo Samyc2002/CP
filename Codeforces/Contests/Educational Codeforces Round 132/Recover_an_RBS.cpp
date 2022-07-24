@@ -12,42 +12,48 @@ typedef unsigned long int ul;
 typedef long long int ll;
 typedef unsigned long long int ull;
 
+bool check(string s) {
+    ll count = 0;
+    for (char c : s) {
+        if (c == '(')
+            count++;
+        if (c == ')')
+            count--;
+        if (count < 0)
+            return false;
+    }
+
+    return count == 0;
+}
+
 void solve() {
     string s;
     cin >> s;
 
-    if (s == "??") {
-        cout << "YES" << endl;
-        return;
+    ll n = s.length();
+    ll o = n / 2, c = n / 2;
+    vector<ll> pos;
+
+    for (ll i = 0; i < n; i++) {
+        if (s[i] == '?')
+            pos.PB(i);
+        if (s[i] == '(')
+            o--;
+        if (s[i] == ')')
+            c--;
     }
 
-    stack<char> st;
-    for (ll i = 0; i < s.length(); i++) {
-        if (s[i] != ')') {
-            st.push(s[i]);
-        } else {
-            st.pop();
-        }
+    for (ll i = 0; i < pos.size(); i++)
+        s[pos[i]] = (i < o) ? '(' : ')';
+
+    bool ok = true;
+    if (o > 0 && c > 0) {
+        swap(s[pos[o - 1]], s[pos[o]]);
+        if (check(s))
+            ok = false;
     }
 
-    if (st.empty()) {
-        cout << "YES" << endl;
-        return;
-    }
-
-    while (!st.empty()) {
-        char c1 = st.top();
-        st.pop();
-        char c2 = st.top();
-        st.pop();
-
-        if ((c1 == '?' && c2 == '?') || (c1 == ')' && c2 == '?')) {
-            cout << "NO" << endl;
-            return;
-        }
-    }
-
-    cout << "YES" << endl;
+    cout << (ok ? "YES" : "NO") << endl;
 }
 
 int main() {
