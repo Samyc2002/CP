@@ -14,20 +14,28 @@ typedef unsigned long long int ull;
 
 void solve() {
     ll n;
-    cin >> n;
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++) {
-        cin >> a[i];
+    string s;
+    cin >> n >> s;
+
+    string t = s;
+    sort(all(t));
+
+    ll count = 0;
+    vector<ll> ind;
+    for (ll i = 0; i < n; i++) {
+        if (s[i] != t[i]) {
+            count++;
+            ind.PB(i + 1);
+        }
     }
 
-    ll x = 0;
-    for (ll i = 1; i < n; i++) {
-        ll t = log2(n - i);
-        ll r = i + (1 << t);
-        x += a[i];
-        cout << x << endl;
-        a[r] += a[i];
-        a[i] = 0;
+    cout << (count == 0 ? 0 : 1) << endl;
+    if (count) {
+        cout << count << " ";
+        for (ll i = 0; i < ind.size(); i++) {
+            cout << ind[i] << " ";
+        }
+        cout << endl;
     }
 }
 
@@ -35,7 +43,7 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }

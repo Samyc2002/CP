@@ -15,27 +15,44 @@ typedef unsigned long long int ull;
 void solve() {
     ll n;
     cin >> n;
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++) {
+    vector<ll> a(n);
+    map<ll, ll> m;
+    for (ll i = 0; i < n; i++) {
         cin >> a[i];
+        m[a[i]]++;
     }
 
-    ll x = 0;
-    for (ll i = 1; i < n; i++) {
-        ll t = log2(n - i);
-        ll r = i + (1 << t);
-        x += a[i];
-        cout << x << endl;
-        a[r] += a[i];
-        a[i] = 0;
+    priority_queue<ll> q;
+    for (auto p : m) {
+        q.push(p.second);
     }
+
+    ll ans = n;
+    while (q.size() >= 2) {
+        ll a = q.top();
+        q.pop();
+        ll b = q.top();
+        q.pop();
+
+        a--;
+        b--;
+        ans -= 2;
+        if (a) {
+            q.push(a);
+        }
+        if (b) {
+            q.push(b);
+        }
+    }
+
+    cout << ans << endl;
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) {
         solve();
     }

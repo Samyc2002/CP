@@ -13,22 +13,13 @@ typedef long long int ll;
 typedef unsigned long long int ull;
 
 void solve() {
-    ll n;
-    cin >> n;
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++) {
+    vector<ll> a(3);
+    for (ll i = 0; i < 3; i++) {
         cin >> a[i];
     }
-
-    ll x = 0;
-    for (ll i = 1; i < n; i++) {
-        ll t = log2(n - i);
-        ll r = i + (1 << t);
-        x += a[i];
-        cout << x << endl;
-        a[r] += a[i];
-        a[i] = 0;
-    }
+    sort(all(a));
+    cout << min(((a[0] + a[1] + a[2]) / 3),
+                (a[0] + a[1] + a[2]) - *max_element(all(a)));
 }
 
 int main() {

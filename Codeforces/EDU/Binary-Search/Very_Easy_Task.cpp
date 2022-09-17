@@ -12,23 +12,32 @@ typedef unsigned long int ul;
 typedef long long int ll;
 typedef unsigned long long int ull;
 
+ll n, x, y;
+
+bool good(ll t) {
+    ll m = min(x, y);
+    if (t < m)
+        return false;
+
+    t -= m;
+    return 1 + (t / x) + (t / y) >= n;
+}
+
 void solve() {
-    ll n;
-    cin >> n;
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++) {
-        cin >> a[i];
+    cin >> n >> x >> y;
+
+    ll l = 0;
+    ll r = 2e9 + 5;
+    while (r > l + 1) {
+        ll mid = (l + r) / 2;
+
+        if (good(mid))
+            r = mid;
+        else
+            l = mid;
     }
 
-    ll x = 0;
-    for (ll i = 1; i < n; i++) {
-        ll t = log2(n - i);
-        ll r = i + (1 << t);
-        x += a[i];
-        cout << x << endl;
-        a[r] += a[i];
-        a[i] = 0;
-    }
+    cout << r << endl;
 }
 
 int main() {

@@ -15,19 +15,27 @@ typedef unsigned long long int ull;
 void solve() {
     ll n;
     cin >> n;
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++) {
-        cin >> a[i];
+    vector<ll> a;
+    for (ll i = 2; i <= n; i += 2) {
+        a.PB(i);
+    }
+    for (ll i = 1; i <= n; i += 2) {
+        a.PB(i);
     }
 
-    ll x = 0;
-    for (ll i = 1; i < n; i++) {
-        ll t = log2(n - i);
-        ll r = i + (1 << t);
-        x += a[i];
-        cout << x << endl;
-        a[r] += a[i];
-        a[i] = 0;
+    bool ok = true;
+    for (ll i = 0; i < n - 1; i++) {
+        if (abs(a[i + 1] - a[i]) == 1) {
+            ok = false;
+            break;
+        }
+    }
+    if (!ok) {
+        cout << "NO SOLUTION";
+        return;
+    }
+    for (ll i = 0; i < n; i++) {
+        cout << a[i] << " ";
     }
 }
 

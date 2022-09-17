@@ -13,22 +13,22 @@ typedef long long int ll;
 typedef unsigned long long int ull;
 
 void solve() {
-    ll n;
-    cin >> n;
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++) {
-        cin >> a[i];
+    string s;
+    cin >> s;
+
+    ll n = s.length();
+    ll i = 0, j = 0, ans = 0;
+    while (j < n - 1) {
+        if (s[j + 1] == s[i])
+            j++;
+        else {
+            ans = max(ans, j - i + 1);
+            j++;
+            i = j;
+        }
     }
 
-    ll x = 0;
-    for (ll i = 1; i < n; i++) {
-        ll t = log2(n - i);
-        ll r = i + (1 << t);
-        x += a[i];
-        cout << x << endl;
-        a[r] += a[i];
-        a[i] = 0;
-    }
+    cout << max(ans, j - i + 1);
 }
 
 int main() {

@@ -15,19 +15,21 @@ typedef unsigned long long int ull;
 void solve() {
     ll n;
     cin >> n;
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++) {
-        cin >> a[i];
+    vector<pair<ll, ll>> a(n);
+    unordered_map<ll, ll> m;
+    for (ll i = 0; i < n; i++) {
+        cin >> a[i].first >> a[i].second;
+        m[a[i].first]++;
     }
 
-    ll x = 0;
-    for (ll i = 1; i < n; i++) {
-        ll t = log2(n - i);
-        ll r = i + (1 << t);
-        x += a[i];
-        cout << x << endl;
-        a[r] += a[i];
-        a[i] = 0;
+    vector<pair<ll, ll>> ans(n, {n - 1, 0});
+    for (ll i = 0; i < n; i++) {
+        ans[i].first += m[a[i].second];
+        ans[i].second += n - m[a[i].second] - 1;
+    }
+
+    for (ll i = 0; i < n; i++) {
+        cout << ans[i].first << " " << ans[i].second << endl;
     }
 }
 

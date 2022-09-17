@@ -13,22 +13,19 @@ typedef long long int ll;
 typedef unsigned long long int ull;
 
 void solve() {
-    ll n;
-    cin >> n;
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++) {
+    ll n, m, k;
+    cin >> n >> m >> k;
+    vector<ll> a(m + 1);
+    for (ll i = 0; i <= m; i++) {
         cin >> a[i];
     }
 
-    ll x = 0;
-    for (ll i = 1; i < n; i++) {
-        ll t = log2(n - i);
-        ll r = i + (1 << t);
-        x += a[i];
-        cout << x << endl;
-        a[r] += a[i];
-        a[i] = 0;
-    }
+    ll friends = 0;
+    for (ll i = 0; i < m; i++)
+        if (__builtin_popcount(a[i] ^ a[m]) <= k)
+            friends++;
+
+    cout << friends << endl;
 }
 
 int main() {

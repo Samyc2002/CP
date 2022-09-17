@@ -15,20 +15,21 @@ typedef unsigned long long int ull;
 void solve() {
     ll n;
     cin >> n;
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++) {
-        cin >> a[i];
+    vector<ll> memo = {4, 7, 47, 74, 444, 447, 474, 744, 774, 747, 477, 777};
+    ll fours = 0, sevens = 0;
+    while (n) {
+        if (n % 10 == 4)
+            fours++;
+        if (n % 10 == 7)
+            sevens++;
+        n /= 10;
     }
-
-    ll x = 0;
-    for (ll i = 1; i < n; i++) {
-        ll t = log2(n - i);
-        ll r = i + (1 << t);
-        x += a[i];
-        cout << x << endl;
-        a[r] += a[i];
-        a[i] = 0;
+    if ((fours == 0 && sevens == 0) ||
+        ((fours + sevens) != 4 && (fours + sevens) != 7)) {
+        cout << "NO";
+        return;
     }
+    cout << "YES";
 }
 
 int main() {

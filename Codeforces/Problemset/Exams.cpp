@@ -15,20 +15,22 @@ typedef unsigned long long int ull;
 void solve() {
     ll n;
     cin >> n;
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++) {
-        cin >> a[i];
+    vector<pair<ll, ll>> a(n);
+    for (ll i = 0; i < n; i++) {
+        cin >> a[i].first >> a[i].second;
     }
 
-    ll x = 0;
-    for (ll i = 1; i < n; i++) {
-        ll t = log2(n - i);
-        ll r = i + (1 << t);
-        x += a[i];
-        cout << x << endl;
-        a[r] += a[i];
-        a[i] = 0;
+    sort(all(a));
+    ll ans = -1;
+    for (ll i = 0; i < n; i++) {
+        if (ans <= a[i].second) {
+            ans = a[i].second;
+        } else {
+            ans = a[i].first;
+        }
     }
+
+    cout << ans;
 }
 
 int main() {

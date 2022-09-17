@@ -15,20 +15,18 @@ typedef unsigned long long int ull;
 void solve() {
     ll n;
     cin >> n;
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++) {
+    vector<ll> a(n);
+    for (ll i = 0; i < n; i++) {
         cin >> a[i];
     }
 
-    ll x = 0;
+    ll ans = 0, mx = a[0];
     for (ll i = 1; i < n; i++) {
-        ll t = log2(n - i);
-        ll r = i + (1 << t);
-        x += a[i];
-        cout << x << endl;
-        a[r] += a[i];
-        a[i] = 0;
+        mx = max(mx, a[i]);
+        ans += max(mx - a[i], 0LL);
     }
+
+    cout << ans;
 }
 
 int main() {

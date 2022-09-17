@@ -15,20 +15,37 @@ typedef unsigned long long int ull;
 void solve() {
     ll n;
     cin >> n;
-    vector<ll> a(n + 1);
-    for (ll i = 1; i <= n; i++) {
+    vector<ll> a(n);
+    for (ll i = 0; i < n; i++) {
         cin >> a[i];
     }
 
-    ll x = 0;
-    for (ll i = 1; i < n; i++) {
-        ll t = log2(n - i);
-        ll r = i + (1 << t);
-        x += a[i];
-        cout << x << endl;
-        a[r] += a[i];
-        a[i] = 0;
+    ll sum = accumulate(all(a), 0LL);
+    if (sum % 3) {
+        cout << 0;
+        return;
     }
+
+    vector<ll> c(n);
+    ll currSum = 0;
+    for (ll i = n - 1; i >= 0; i--) {
+        currSum += a[i];
+        if (currSum == sum / 3)
+            c[i] = 1;
+    }
+    for (ll i = n - 2; i >= 0; i--) {
+        c[i] += c[i + 1];
+    }
+
+    ll ans = 0;
+    currSum = 0;
+    for (ll i = 0; i < n - 2; i++) {
+        currSum += a[i];
+        if (currSum == sum / 3)
+            ans += c[i + 2];
+    }
+
+    cout << ans;
 }
 
 int main() {
